@@ -10,7 +10,7 @@ by adding `keycloak_api` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:keyacloak_api, git: "https://github.com/elixir-lang/gettext.git", tag: "0.1"}
+    {:keyacloak_api, git: "git@github.com:HeyHomie/keycloak_api.git"}
   ]
 end
 ```
