@@ -23,7 +23,8 @@ defmodule KeycloakAPI.MixProject do
     [
       {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
-      {:jason, ">= 1.0.0"}
+      {:jason, ">= 1.0.0"},
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
     ]
   end
 end
