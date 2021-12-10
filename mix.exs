@@ -7,7 +7,16 @@ defmodule KeycloakAPI.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      aliases: aliases(),
+      deps: deps(),
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.html": :test,
+        "coveralls.xml": :test
+      ],
+      elixirc_options: [warnings_as_errors: true]
     ]
   end
 
@@ -24,7 +33,14 @@ defmodule KeycloakAPI.MixProject do
       {:hackney, "~> 1.17"},
       {:jason, ">= 1.0.0"},
       {:bypass, "~> 2.1", only: :test},
-      {:credo, "~> 1.5", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
+      {:excoveralls, "~> 0.10", only: :test}
+    ]
+  end
+
+  defp aliases do
+    [
+      test: ["test --warnings-as-errors"]
     ]
   end
 end

@@ -1,6 +1,7 @@
 defmodule KeycloakAPI.HTTPClient.Hackney do
   @moduledoc """
   Hackney-based HTTP client adapter.
+
   ## Options
     * `:default_opts` - default options passed down to Hackney, see `:hackney.request/5` for
       more information.
@@ -8,11 +9,6 @@ defmodule KeycloakAPI.HTTPClient.Hackney do
 
   @behaviour KeycloakAPI.HTTPClient
 
-  defstruct default_opts: []
-
-  def init(opts) do
-    struct!(__MODULE__, opts)
-  end
 
   @impl true
   @spec request(atom(), String.t(), list(), String.t(), Keyword.t()) ::
