@@ -30,7 +30,7 @@ defmodule KeycloakAPI.User do
     {:ok,
       "http://localhost:8080/auth/admin/realms/master/users/f6695acb-1418-4ad3-85bb-9aa06025b984"}
   """
-  @spec create(map(), String.t()) :: {:ok, Tesla.Env.t()} | {:error, map()}
+  @spec create(map(), String.t()) :: {:ok, map()} | {:error, map()}
   def create(params, admin_access_token) when is_map(params) when is_binary(admin_access_token) do
     url = "#{get_env!(:site)}/admin/realms/#{get_env!(:realm)}/users"
 
