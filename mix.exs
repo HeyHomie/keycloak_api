@@ -21,7 +21,6 @@ defmodule KeycloakAPI.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:tesla, "~> 1.4"},
       {:hackney, "~> 1.17"},
       {:jason, ">= 1.0.0"},
       {:bypass, "~> 2.1", only: :test},
