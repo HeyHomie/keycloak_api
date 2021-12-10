@@ -9,7 +9,6 @@ defmodule KeycloakAPI.HTTPClient.Hackney do
 
   @behaviour KeycloakAPI.HTTPClient
 
-
   @impl true
   @spec request(atom(), String.t(), list(), String.t(), Keyword.t()) ::
           {:ok, map()} | {:error, any()}
