@@ -21,6 +21,28 @@ defmodule KeycloakAPI.UserTest do
     ]
   }
 
+  @show_user_success_response %{
+    "id" => @user_id,
+    "createdTimestamp" => 1_635_967_633_697,
+    "username" => "test2@test.com",
+    "enabled" => true,
+    "totp" => false,
+    "emailVerified" => true,
+    "firstName" => "Brandon",
+    "lastName" => "Springer",
+    "email" => "test2@test.com",
+    "disableableCredentialTypes" => [],
+    "requiredActions" => [],
+    "notBefore" => 0,
+    "access" => %{
+      "manageGroupMembership" => true,
+      "view" => true,
+      "mapRoles" => true,
+      "impersonate" => true,
+      "manage" => true
+    }
+  }
+
   setup do
     bypass = Bypass.open()
     bypass_url = "http://localhost:#{bypass.port}"
@@ -44,4 +66,38 @@ defmodule KeycloakAPI.UserTest do
     end
   end
 
+  describe "get/2" do
+    test "when request is success", %{bypass: bypass} do
+      Bypass.expect(bypass, fn conn ->
+        assert conn.request_path == "/admin/realms/master/users/#{@user_id}"
+        assert conn.method == "GET"
+
+        Plug.Conn.resp(conn, 200, Jason.encode!(@show_user_success_response))
+      end)
+
+      expected_user = %{
+        "id" => @user_id,
+        "createdTimestamp" => 1_635_967_633_697,
+        "username" => "test2@test.com",
+        "enabled" => true,
+        "totp" => false,
+        "emailVerified" => true,
+        "firstName" => "Brandon",
+        "lastName" => "Springer",
+        "email" => "test2@test.com",
+        "disableableCredentialTypes" => [],
+        "requiredActions" => [],
+        "notBefore" => 0,
+        "access" => %{
+          "manageGroupMembership" => true,
+          "view" => true,
+          "mapRoles" => true,
+          "impersonate" => true,
+          "manage" => true
+        }
+      }
+
+      assert User.get(@user_id, "admin-access-token") == {:ok, expected_user}
+    end
+  end
 end
