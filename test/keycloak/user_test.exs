@@ -1,7 +1,7 @@
 defmodule KeycloakAPI.UserTest do
-	use ExUnit.Case, async: true
+  use ExUnit.Case, async: true
 
-	alias KeycloakAPI.User
+  alias KeycloakAPI.User
 
   @user_id "f2920937-ab8c-47fd-ac5a-4089707012b4"
 
@@ -57,12 +57,16 @@ defmodule KeycloakAPI.UserTest do
         assert conn.method == "POST"
 
         conn
-        |> Plug.Conn.put_resp_header("Location", "http://localhost:8080/auth/admin/realms/master/users/#{@user_id}")
+        |> Plug.Conn.put_resp_header(
+          "Location",
+          "http://localhost:8080/auth/admin/realms/master/users/#{@user_id}"
+        )
         |> Plug.Conn.put_resp_header("X-Frame-Optionse", "SAMEORIGIN")
         |> Plug.Conn.resp(201, "")
       end)
 
-      assert User.create(@valid_params, "admin-access-token") == {:ok, "http://localhost:8080/auth/admin/realms/master/users/#{@user_id}"}
+      assert User.create(@valid_params, "admin-access-token") ==
+               {:ok, "http://localhost:8080/auth/admin/realms/master/users/#{@user_id}"}
     end
   end
 
