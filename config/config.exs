@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :keycloak, key: :value
+#     config :keycloak_api, key: :value
 #
 # And access this configuration in your application as:
 #
-#     Application.get_env(:keycloak, :key)
+#     Application.get_env(:keycloak_api, :key)
 #
 # Or configure a 3rd-party app:
 #
@@ -29,5 +29,9 @@ use Mix.Config
 #
 
 config :tesla, adapter: Tesla.Adapter.Hackney
+
+config :logger, level: :info
+
+config :keycloak_api, http_client: KeycloakAPI.HTTPClient.Hackney
 
 import_config "#{Mix.env()}.exs"
