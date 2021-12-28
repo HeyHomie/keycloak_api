@@ -104,7 +104,10 @@ defmodule KeycloakAPI.User do
   # Gets an env variable
   @spec get_env!(atom()) :: term()
   defp get_env!(key) do
-    Application.fetch_env!(:keycloak_api, key)
+    Application.fetch_env!(:keycloak_api, key) ||
+      raise """
+      environment variable <#{key}> is missing.
+      """
   end
 
   defp handle_response({:ok, %{status: 201, headers: headers}}) do
