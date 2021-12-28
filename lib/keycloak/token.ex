@@ -49,9 +49,9 @@ defmodule KeycloakAPI.Token do
   @spec get_env!(atom()) :: term()
   defp get_env!(key) do
     Application.fetch_env!(:keycloak_api, key) ||
-    raise """
-    environment variable <#{key}> is missing.
-    """
+      raise """
+      environment variable <#{key}> is missing.
+      """
   end
 
   defp handle_response({:ok, %{status: 200, body: body}}) do
